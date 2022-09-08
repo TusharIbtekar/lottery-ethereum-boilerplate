@@ -1,6 +1,7 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const Web3 = require('web3');
 const { interface, bytecode } = require('./compile');
+const util = require('util');
 
 require('dotenv').config();
 const mnemonic = process.env.MNEMONIC;
@@ -21,7 +22,8 @@ const deploy = async() => {
     .deploy({ data: bytecode })
     .send({ from: accounts[0], gas: '1000000' });
 
-  console.log('Contract deployed to ', accounts[0]);
+  console.log('Contract deployed to ', result.options.address);
+  console.log(util.inspect(interface, false, null, true));
   provider.engine.stop();
 };
 deploy();
