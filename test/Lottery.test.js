@@ -103,5 +103,8 @@ describe('Lottery Contract', () => {
     
     assert(difference > web3.utils.toWei('1.8', 'ether'));
     assert.equal(0, players.length);
+
+    const winner = await lottery.methods.winner().call();
+    console.log('winner', winner);
   });
 });
